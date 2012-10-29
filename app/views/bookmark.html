@@ -1,0 +1,76 @@
+<script type="text/ng-template"  id="bookmark.html">
+  <a href="#" tabindex="-1">{{label.name}}</a>
+  <ul class="dropdown-menu">
+    <li data-ng-repeat="bookmark in label.bookmarks | filter:bookmarkTags">
+      <a href="{{bookmark.url}}" data-ng-mouseenter="updateCurrentBookmark(bookmark)" data-original-title="{{bookmark.name}} ({{bookmark.url}})" data-content="{{getBookmarkPopover(bookmark)}}" data-ui-jq="popover">{{bookmark.name}}</a>
+    </li>
+              
+    <li class="dropdown-submenu" data-ng-repeat="label in label.children | filter:labelTags" data-ng-include="'bookmark.html'"></li>
+  </ul>
+</script>
+
+<div class="row">
+  <div class="span6">
+    <select multiple="multiple" data-ui-select2="{placeholder:'Pick one or more tags'}" data-ng-model="selectedTags" style="width:100%;">
+      <option data-ng-repeat="tag in tags" value="{{tag}}">{{tag}}</option>
+    </select>
+  </div>
+  
+  <div class="span6">
+    <label for="radioAny" style="display:inline-block">
+      <input id="radioAny" type="radio" data-ng-model="tagCondition" value="any"/> Any
+    </label>
+    
+    <label for="radioAll" style="display:inline-block; margin-left:10px;">
+      <input id="radioAll" type="radio" data-ng-model="tagCondition" value="all"/> All
+    </label>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <div class="navbar" style="margin-top: 20px;">
+      <div class="navbar-inner">
+        <div class="container">
+         
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          
+          <a class="brand" href="#">Bookmarks</a>
+          
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="dropdown" data-ng-repeat="rootLabel in labelsTree.children | filter:labelTags">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{rootLabel.name}} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li data-ng-repeat="bookmark in rootLabel.bookmarks | filter:bookmarkTags">
+                    <a href="{{bookmark.url}}" data-ng-mouseenter="updateCurrentBookmark(bookmark)" data-original-title="{{bookmark.name}} ({{bookmark.url}})" data-content="{{getBookmarkPopover(bookmark)}}" data-ui-jq="popover">{{bookmark.name}}</a>
+                  </li>
+                  
+                  <li class="dropdown-submenu" data-ng-repeat="label in rootLabel.children | filter:labelTags" data-ng-include="'bookmark.html'"></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span12">
+    <h2>{{currentBookmark.name}}</h2>
+    <p>
+      <a href="{{currentBookmark.url}}">{{currentBookmark.url}}</a>
+    </p>
+    <p>
+      Tags: <span data-ng-repeat="tag in currentBookmark.tags.split(',')" class="label label-important" style="margin-right:10px;">{{tag}}</span>
+    </p>
+    <p>{{currentBookmark.summary}}</p>
+  </div>
+</div>

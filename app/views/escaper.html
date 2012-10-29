@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="span12">
+    <div class="row">
+      <div class="span6">
+        <div class="form-horizontal">
+          <h2>1. Paste your code here</h2>
+
+          <div class="control-group">
+            <textarea style="width: 95%; height: 250px;" data-ng-model="sourceCode"></textarea>
+          </div>
+
+          <div class="control-group">
+            <label for="showLinesCheckbox" class="control-label">Show lines</label>
+            <div class="controls">
+              <label class="checkbox"> <i class="icon-question-sign" style="cursor: pointer;" data-ui-jq="tooltip"
+                title="Check it if you want to display line numbers on the left of your code"></i> <input
+                type="checkbox" value="true" id="showLinesCheckbox" name="showLinesCheckbox" data-ng-model="showLines" />
+              </label>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label for="scrollableCheckbox" class="control-label">Scrollable</label>
+            <div class="controls">
+              <label class="checkbox"> <i class="icon-question-sign" style="cursor: pointer;" data-ui-jq="tooltip"
+                title="Check it if you want your code to be 350 pixels max height (= 19 lines) and scroll in case of overflow"></i>
+                <input type="checkbox" value="true" id="scrollableCheckbox" name="scrollableCheckbox"
+                data-ng-model="scrollable" />
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="span6">
+        <h2>2. Copy the escaped version</h2>
+        <textarea style="width: 95%; height: 330px;" data-ng-bind="wrappedSourceCode()"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span6">
+        <h2>3. Paste it on your website and enjoy the result!</h2>
+        <pre class="prettyprint{{showLines && ' linenums' || ''}}{{scrollable && ' pre-scrollable' || ''}}" data-ng-bind-html-unsafe="prettySourceCode()"></pre>
+      </div>
+
+      <div class="span6">
+        <h2>4. Resources</h2>
+        <dl>
+          <dt>Configure Bootstrap</dt>
+          <dd>
+            <a href="http://twitter.github.com/bootstrap/index.html" target="_blank">Download files and import them
+              on your website.</a>
+          </dd>
+          <dt>Show code with Bootstrap</dt>
+          <dd>
+            <a href="http://twitter.github.com/bootstrap/base-css.html#code" target="_blank">Read that!</a>
+          </dd>
+          <dt>Configure Code Prettifier</dt>
+          <dd>
+            <a href="http://google-code-prettify.googlecode.com/svn/trunk/README.html" target="_blank">Look here!</a><br />
+            <span class="label label-warning">Warning</span> Code Escaper is using the
+            <code>prettify.css</code>
+            remastered by Bootstrap, not the one from Code Prettifier.
+          </dd>
+          <dt>Minimum page content</dt>
+          <dd>
+            <pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/bootstrap.min.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/prettify.css&quot;&gt;
+    &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;js/prettify.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body onload=&quot;prettyPrint()&quot;&gt;
+    &lt;!-- your HTML body here --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+            <span class="label label-info">Info</span> Here, the minified version of Bootstrap is used but you're free
+            to use the classic version. <br /> <span class="label label-warning">Warning</span> Be sure to include the
+            last version of jQuery.
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
