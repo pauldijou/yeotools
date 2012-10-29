@@ -1,0 +1,13 @@
+@import "compass_twitter_bootstrap";
+@import "compass_twitter_bootstrap_responsive";
+@import "prettify";
+@import "angular-ui.min";
+@import "select2";
+
+body > .container {
+  margin-top: 60px;
+}
+
+label {
+  cursor: pointer;
+}
